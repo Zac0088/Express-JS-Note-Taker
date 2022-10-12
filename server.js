@@ -58,3 +58,9 @@ app.delete('/routes/note/:id', (req, res) => {
             newDB.push(newNote);
     }
 }
+fs.writeFile(path.join(__dirname, '/db/db.json'), JSON.stringify(newDB, null, 2), (err)=> {
+    if (err) throw err;
+    res.json(req.body);
+});
+    });
+});
