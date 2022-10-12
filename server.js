@@ -1,8 +1,6 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const { join } = require("path");
-const { text } = require("body-parser");
 const app = express();
 const PORT = process.env.port || 3001;
 
@@ -44,16 +42,19 @@ app.post('/routes/note.js', (req, res)=>{
     });
 });
 
-appdelte('/note/id (req, res') => {
-    id = parseInt(params.id);
-    fs.readFile(join)(__dirname, '/db/db.json'), 'utf8', =>{
+app.delete('/routes/note/:id', (req, res) => {
+    const id =parseInt(req.params.id);
+    fs.readFile(path.join(__dirname, '/db/db.json'), 'utf8', (err, data)=>{
         if (err) throw err;
+        const db =JSON.parse(data);
         const newDB =[];
-        const newNote = {
-            title: db[i].title,
-            text: db[i].text,
-            id: db[i].text
-        };
-        newDB.push(newNote);
+        for(let i =0; i < db.dblength; i++)
+        { if (i !== id)
+            { const newNote = {
+                title: db[i].title,
+                text: db[i].text,
+                id: newDB.length
+            };
+            newDB.push(newNote);
     }
 }
