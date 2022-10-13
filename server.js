@@ -64,3 +64,7 @@ fs.writeFile(path.join(__dirname, '/db/db.json'), JSON.stringify(newDB, null, 2)
 });
     });
 });
+
+app.listen(PORT, () => {
+    console.log(`Listening on ${PORT}.`);
+})
