@@ -57,3 +57,29 @@ router.post('/', (req, res) => {
 
         })
 })
+
+router.delete('/:id', (req,res)=>{
+    fs.readFile(path.join(__dirname, '../../db/db.json'), 'utf8', (err, jsonstring)=> {
+        if (err) {
+            console.log("File read error", err);
+            return;
+        }
+        try{
+            const notes = JSON.parse(jsonstring);
+            const deletenote = notes.find(note => note.id === req.params.id);
+            if (!deletenote) return res.status(404).send('Could not delete request note');
+            const index = notes.indexOf(deletenote);
+            notes.splice(index,1);
+            jsonWriter(notes);
+
+            res.json(deletenote);
+        }
+        catch (err) {
+            console.log("Error parsing string", err);
+        }
+        
+    })
+});
+
+module.exports = router;
+
